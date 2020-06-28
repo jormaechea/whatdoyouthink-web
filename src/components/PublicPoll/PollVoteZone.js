@@ -17,8 +17,7 @@ const PollVoteZone = ({ poll }) => {
 	const [userVote, setUserVote] = useState();
 
 	useEffect(() => {
-		if(poll)
-			setStatus('ready');
+		setStatus(poll ? 'ready' : 'loading');
 	}, [poll]);
 
 	const sendVote = async voteValue => {
@@ -32,6 +31,7 @@ const PollVoteZone = ({ poll }) => {
 		await PollApi.votePoll(poll.id, voteValue);
 
 		setStatus('done');
+		setUserVote(null)
 	}
 
 	return (status !== 'done') ? (
