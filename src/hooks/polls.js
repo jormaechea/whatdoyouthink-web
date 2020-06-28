@@ -1,12 +1,20 @@
 import axios from 'axios';
 
-const apiBaseUrl = 'https://simplepollapi.jormaechea.com.ar';
-// const apiBaseUrl = 'http://192.168.0.31:4000';
+const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
+const timeout = 5000;
 
-const getPoll = async pollId => {
-	const { status, data } = await axios.get(`${apiBaseUrl}/polls/${pollId}`, {
-		timeout: 3000,
-		responseType: 'json'
+const callPublicApi = async ({
+	method = 'get',
+	path,
+	...options
+}) => {
+
+	const { status, data } = await axios({
+		method: method.toLowerCase(),
+		url: `${apiBaseUrl}${path}`,
+		timeout,
+		responseType: 'json',
+		...options
 	});
 
 	if(status !== 200)
@@ -15,20 +23,21 @@ const getPoll = async pollId => {
 	return data;
 };
 
-const votePoll = async (pollId, vote, comment = '') => {
-	const { status, data } = await axios.post(`${apiBaseUrl}/polls/${pollId}/vote`, {
-		type: vote,
-		comment
-	},
-	{
-		timeout: 3000,
-		responseType: 'json'
+const getPoll = pollId => {
+	return callPublicApi({
+		path: `/polls/${pollId}`
+	})
+};
+
+const votePoll = (pollId, vote, comment = '') => {
+	return callPublicApi({
+		method: 'post',
+		path: `/polls/${pollId}/vote`,
+		data: {
+			type: vote,
+			comment
+		}
 	});
-
-	if(status !== 200)
-		throw	new Error(`[${status}] ${data}`);
-
-	return data;
 };
 
 export default {
