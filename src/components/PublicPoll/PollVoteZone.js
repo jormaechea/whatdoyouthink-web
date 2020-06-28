@@ -1,39 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
 
 import Skeleton from 'react-loading-skeleton';
 
+import Emoji from 'a11y-react-emoji';
+
 import PollApi from '../../hooks/polls';
-
-const votes = {
-	thumbs: {
-		negative: '👎',
-		positive: '👍'
-	},
-	emojis: {
-		negative: '😠',
-		positive: '😀'
-	}
-};
-
-const vote = async (pollId, voteValue, setStatus) => {
-
-	setStatus('voting');
-
-	await PollApi.votePoll(pollId, voteValue);
-
-	setStatus('done');
-}
+import PollVoteOption from './PollVoteOption';
 
 const PollVoteZone = ({ poll }) => {
 
-	const [status, setStatus] = useState('ready');
+	const [status, setStatus] = useState('loading');
+	const [userVote, setUserVote] = useState();
 
-	return status === 'ready' ? (
+	useEffect(() => {
+		if(poll)
+			setStatus('ready');
+	}, [poll]);
+
+	const sendVote = async voteValue => {
+
+		if(status !== 'ready')
+			return;
+
+		setUserVote(voteValue)
+		setStatus('voting');
+
+		await PollApi.votePoll(poll.id, voteValue);
+
+		setStatus('done');
+	}
+
+	return (status !== 'done') ? (
 		<Container fluid>
 			<Row className="justify-content-md-center text-center">
 				<Col className="text-center">
@@ -44,26 +45,41 @@ const PollVoteZone = ({ poll }) => {
 			</Row>
 			<Row className="justify-content-md-center text-center">
 				<Col xs="12" md="6">
-					{poll ? (
-						<Button block variant="success" size="lg" className="mt-5 py-5" onClick={() => vote(poll.id, 'positive', setStatus)}>
-							<span role="img" aria-label="thumbs-up" style={{ fontSize: '3em' }}>
-								{votes[poll.kind].positive}
-							</span>
-						</Button>
-					) : <Skeleton height={186} className="mt-5" />}
+					<PollVoteOption
+						kind={poll && poll.kind}
+						voteValue="positive"
+						userVote={userVote}
+						variant="success"
+						status={status}
+						handleClick={sendVote}
+					/>
 				</Col>
 				<Col xs="12" md="6">
-					{poll ? (
-						<Button block variant="danger" size="lg" className="mt-5 py-5" onClick={() => vote(poll.id, 'negative', setStatus)}>
-							<span role="img" aria-label="thumbs-down" style={{ fontSize: '3em' }}>
-								{votes[poll.kind].negative}
-							</span>
-						</Button>
-					) : <Skeleton height={186} className="mt-5" />}
+					<PollVoteOption
+						kind={poll && poll.kind}
+						voteValue="negative"
+						userVote={userVote}
+						variant="danger"
+						status={status}
+						handleClick={sendVote}
+					/>
 				</Col>
 			</Row>
 		</Container>
-	) : (status === 'voting' ? 'Voting...' : 'Done!');
+	) : (
+		<Container fluid>
+			<Row className="justify-content-md-center text-center">
+				<Col className="text-center">
+					<p>
+						{'Thanks for voting!'}
+					</p>
+					<p>
+						<Emoji symbol="🎉"  style={{ fontSize: '3em' }} />
+					</p>
+				</Col>
+			</Row>
+		</Container>
+	);
 };
 
 export default PollVoteZone;

@@ -9,8 +9,7 @@ import Poll from './Poll';
 const useGetPoll = async (pollId, setPoll) => {
 	try {
 		const poll = await PollApi.getPoll(pollId);
-		setTimeout(() => setPoll(poll), 1000);
-		// setPoll(poll);
+		setPoll(poll);
 	} catch(e) {
 		console.error(`Error fetching poll: ${e.message}`);
 	}

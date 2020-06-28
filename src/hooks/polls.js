@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// const apiBaseUrl = 'https://simplepollapi.jormaechea.com.ar';
-const apiBaseUrl = 'http://192.168.0.31:4000';
+const apiBaseUrl = 'https://simplepollapi.jormaechea.com.ar';
+// const apiBaseUrl = 'http://192.168.0.31:4000';
 
 const getPoll = async pollId => {
 	const { status, data } = await axios.get(`${apiBaseUrl}/polls/${pollId}`, {
