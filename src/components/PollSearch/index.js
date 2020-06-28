@@ -25,8 +25,19 @@ const PollSearch = ({
 
 	return (
 		<Form inline={inline} onSubmit={goToPoll}>
-			<FormControl type="text" placeholder="Type a Poll ID" className="mr-sm-2" value={pollId} onChange={e => setPollId(e.target.value)} />
-			<Button variant="outline-success" className={inline ? '' : 'mt-2'} onClick={goToPoll}>Go to Poll!</Button>
+			<FormControl
+				type="text"
+				placeholder="Type a Poll ID"
+				className="mr-sm-2"
+				value={pollId}
+				onChange={e => setPollId(e.target.value)}
+			/>
+			<Button
+				variant="outline-success"
+				className={inline ? '' : 'mt-2'}
+				type="submit">
+					Go to Poll!
+			</Button>
 		</Form>
 	);
 };
