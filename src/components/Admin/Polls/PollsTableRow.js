@@ -2,6 +2,8 @@ import React from 'react';
 
 import Skeleton from 'react-loading-skeleton';
 
+import { Link } from 'react-router-dom';
+
 const getVotesStats = votes => {
 	const stats = votes.reduce((acum, vote) => {
 		if(typeof acum[vote.type] !== 'undefined')
@@ -23,7 +25,7 @@ const PollsTableRow = ({
 			<td>{poll ? poll.title : <Skeleton />}</td>
 			<td>{poll ? poll.kind : <Skeleton />}</td>
 			<td>{poll ? getVotesStats(poll.votes) : <Skeleton />}</td>
-			<td>{poll ? poll.createdAt : <Skeleton />}</td>
+			<td>{poll ? <Link to={`/poll/${poll.id}`} title={`View ${poll.title}`}>View</Link> : <Skeleton />}</td>
 		</tr>
 	);
 };

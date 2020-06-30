@@ -14,7 +14,7 @@ const PollsTable = ({
 				<td>Poll</td>
 				<td>Kind</td>
 				<td>Votes</td>
-				<td>Created</td>
+				<td>View poll</td>
 			</tr>
 		</thead>
 		<tbody>

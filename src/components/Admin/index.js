@@ -1,62 +1,70 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Spinner from 'react-bootstrap/Spinner';
+import Button from 'react-bootstrap/Button';
 
-import PrivateApi from '../../api/private';
+import { useAuth0 } from '@auth0/auth0-react';
 
-import PollsTable from './PollsTable';
-import LoginLink from './LoginLink';
+const Admin = ({ children }) => {
 
-const Admin = ({ accessToken }) => {
+	const {
+		isLoading,
+		isAuthenticated,
+		error,
+		loginWithRedirect,
+		logout
+	} = useAuth0();
 
-	const [polls, setPolls] = useState();
-	const [loading, setLoading] = useState(true);
-	const [hasError, setHasError] = useState(false);
+	if(isLoading) {
+		return (
+			<Container>
+				<Row className="justify-content-md-center text-center mt-5">
+					<Col>
+						<Spinner animation="border" role="status">
+							<span className="sr-only">Loading...</span>
+						</Spinner>
+					</Col>
+				</Row>
+			</Container>
+		);
+	}
 
-	useEffect(() => {
-		setLoading(true);
-		PrivateApi.getPolls(accessToken)
-			.then(userPolls => {
-				setPolls(userPolls);
-				setLoading(false);
-			})
-			.catch(err => {
-				console.error('An error ocurred with during polls fetch', err);
-				setHasError(err);
-				setLoading(false);
-			});
-	}, [accessToken]);
+	if(error) {
+		return (
+			<Container>
+				<Row>
+					<Col>
+						<h2 className="text-center mt-5 mb-5">An error ocurred</h2>
+					</Col>
+				</Row>
+				<Row className="justify-content-md-center text-center">
+					<Col>
+						<span>{error}</span>
+					</Col>
+				</Row>
+			</Container>
+		);
+	}
+
+	if(!isAuthenticated) {
+		loginWithRedirect();
+		return null;
+	}
 
 	return (
-		hasError ? (
+		<div>
+			{children}
 			<Container>
-				<Row>
+				<Row className="justify-content-md-center text-center mt-5">
 					<Col>
-						<h2 className="text-center mt-5 mb-5">You need to login</h2>
-					</Col>
-				</Row>
-				<Row className="justify-content-md-center text-center">
-					<Col>
-						<LoginLink />
+						<Button onClick={() => logout({ returnTo: window.location.origin })}>Log out</Button>
 					</Col>
 				</Row>
 			</Container>
-		) : (
-			<Container>
-				<Row>
-					<Col>
-						<h2 className="text-center mt-5 mb-5">My polls</h2>
-					</Col>
-				</Row>
-				<Row className="justify-content-md-center text-center">
-					<Col>
-						<PollsTable loading={loading} polls={polls} />
-					</Col>
-				</Row>
-			</Container>
-		)
+		</div>
 	);
 };
 

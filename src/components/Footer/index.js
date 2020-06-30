@@ -9,16 +9,18 @@ const Footer = () => {
 	return (
 		<Navbar bg="light" variant="light" fixed="bottom" className="justify-content-between">
 			<Navbar.Text>
-				<Link to="/admin">
+				<Link to="/admin/polls">
 					<Emoji symbol="🚀" />{' '}
 					Create your own Poll!
 				</Link>
 			</Navbar.Text>
 			<Navbar.Text>
-				<span>Made with</span>{' '}
-				<Emoji symbol="❤️" label="love" />{' '}
-				<span>by</span>{' '}
-				<a href="https://github.com/jormaechea" target="_blank" rel="noopener noreferrer">Joaquín Ormaechea</a>
+				<a href="https://github.com/jormaechea" target="_blank" rel="noopener noreferrer">
+					<span>Made with</span>{' '}
+					<Emoji symbol="❤️" label="love" />{' '}
+					<span>by</span>{' '}
+					<span>Joaquín Ormaechea</span>
+				</a>
 			</Navbar.Text>
 		</Navbar>
 	);
