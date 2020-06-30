@@ -8,7 +8,7 @@ import Skeleton from 'react-loading-skeleton';
 
 import Emoji from 'a11y-react-emoji';
 
-import PollApi from '../../hooks/polls';
+import PublicApi from '../../api/public';
 import PollVoteOption from './PollVoteOption';
 
 const PollVoteZone = ({ poll }) => {
@@ -28,7 +28,7 @@ const PollVoteZone = ({ poll }) => {
 		setUserVote(voteValue)
 		setStatus('voting');
 
-		await PollApi.votePoll(poll.id, voteValue);
+		await PublicApi.votePoll(poll.id, voteValue);
 
 		setStatus('done');
 		setUserVote(null)

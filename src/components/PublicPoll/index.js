@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 
 import Container from 'react-bootstrap/Container';
 
-import PollApi from '../../hooks/polls';
+import PublicApi from '../../api/public';
 
 import Poll from './Poll';
 
 const useGetPoll = async (pollId, setPoll) => {
 	try {
-		const poll = await PollApi.getPoll(pollId);
+		const poll = await PublicApi.getPoll(pollId);
 		setPoll(poll);
 	} catch(e) {
 		console.error(`Error fetching poll: ${e.message}`);
