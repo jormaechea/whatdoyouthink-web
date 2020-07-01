@@ -10,7 +10,7 @@ import PollsTable from './PollsTable';
 
 import { useAuth0 } from '@auth0/auth0-react';
 
-const PollsAdmin = () => {
+const PollsAdminList = () => {
 
 	const { getAccessTokenSilently } = useAuth0();
 
@@ -69,4 +69,4 @@ const PollsAdmin = () => {
 	);
 };
 
-export default PollsAdmin;
+export default PollsAdminList;

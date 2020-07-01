@@ -9,7 +9,7 @@ const Footer = () => {
 	return (
 		<Navbar bg="light" variant="light" fixed="bottom" className="justify-content-between">
 			<Navbar.Text>
-				<Link to="/admin/polls">
+				<Link to="/admin/poll">
 					<Emoji symbol="🚀" />{' '}
 					Create your own Poll!
 				</Link>

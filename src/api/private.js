@@ -30,10 +30,38 @@ const callPrivateApi = async ({
 const getPolls = accessToken => {
 	return callPrivateApi({
 		accessToken,
-		path: `/polls`
+		path: '/polls'
+	})
+};
+
+const getPollById = (accessToken, pollId) => {
+	return callPrivateApi({
+		accessToken,
+		path: `/polls/${pollId}`
+	})
+};
+
+const createPoll = (accessToken, poll) => {
+	return callPrivateApi({
+		accessToken,
+		method: 'post',
+		path: '/polls',
+		data: poll
+	})
+};
+
+const updatePoll = (accessToken, poll, pollId) => {
+	return callPrivateApi({
+		accessToken,
+		method: 'put',
+		path: `/polls/${pollId}`,
+		data: poll
 	})
 };
 
 export default {
-	getPolls
+	getPolls,
+	getPollById,
+	createPoll,
+	updatePoll
 };

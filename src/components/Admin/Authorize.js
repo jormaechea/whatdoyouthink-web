@@ -34,7 +34,7 @@ const Authorize = () => {
 		);
 	}
 
-	return <Redirect to="/admin/polls" />;
+	return <Redirect to="/admin/poll" />;
 };
 
 export default Authorize;

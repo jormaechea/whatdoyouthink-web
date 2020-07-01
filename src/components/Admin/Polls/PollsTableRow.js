@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Button from 'react-bootstrap/Button';
+
 import Skeleton from 'react-loading-skeleton';
 
 import { Link } from 'react-router-dom';
@@ -25,7 +27,17 @@ const PollsTableRow = ({
 			<td>{poll ? poll.title : <Skeleton />}</td>
 			<td>{poll ? poll.kind : <Skeleton />}</td>
 			<td>{poll ? getVotesStats(poll.votes) : <Skeleton />}</td>
-			<td>{poll ? <Link to={`/poll/${poll.id}`} title={`View ${poll.title}`}>View</Link> : <Skeleton />}</td>
+			<td>{poll ? (
+				<span>
+					<Link to={`/admin/poll/${poll.id}`} title={`Edit ${poll.title}`}>
+						<Button>Edit</Button>
+					</Link>
+					{' '}
+					<Link to={`/poll/${poll.id}`} title={`View ${poll.title}`}>
+						<Button variant="success">View</Button>
+					</Link>
+				</span>
+			) : <Skeleton />}</td>
 		</tr>
 	);
 };

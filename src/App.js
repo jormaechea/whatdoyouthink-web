@@ -8,7 +8,8 @@ import {
 import Header from './components/Header';
 import Home from './components/Home';
 import Admin from './components/Admin';
-import PollsAdmin from './components/Admin/Polls/PollsAdmin';
+import PollsAdminList from './components/Admin/Polls/PollsAdminList';
+import PollsAdminEdit from './components/Admin/Polls/PollsAdminEdit';
 import PublicPoll from './components/PublicPoll';
 import Footer from './components/Footer';
 import Authorize from './components/Admin/Authorize';
@@ -25,9 +26,8 @@ const App = () => {
 					<Route path="/poll/:pollId" exact component={PublicPoll} />
 					<Route path="/admin">
 						<Admin>
-							<Route path="/admin/polls">
-								<PollsAdmin />
-							</Route>
+							<Route path="/admin/poll" exact component={PollsAdminList} />
+							<Route path="/admin/poll/:pollId" exact component={PollsAdminEdit} />
 						</Admin>
 					</Route>
 					<Route path="/auth/authorize" exact component={Authorize} />
