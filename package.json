@@ -1,7 +1,17 @@
 {
   "name": "simple-poll-front",
   "version": "0.1.0",
-  "private": true,
+  "description": "This is the Frontend of the Simple Poll app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jormaechea/simple-poll-front.git"
+  },
+  "author": "Joaquín Ormaechea (https://github.com/jormaechea)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jormaechea/simple-poll-front/issues"
+  },
+  "homepage": "https://simplepoll.jormaechea.com.ar",
   "dependencies": {
     "@auth0/auth0-react": "^1.0.0",
     "@testing-library/jest-dom": "^4.2.4",
