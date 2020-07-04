@@ -8,6 +8,8 @@ import Skeleton from 'react-loading-skeleton';
 
 import Emoji from 'a11y-react-emoji';
 
+import store from 'store';
+
 import PublicApi from '../../api/public';
 import PollVoteOption from './PollVoteOption';
 
@@ -17,7 +19,12 @@ const PollVoteZone = ({ poll }) => {
 	const [userVote, setUserVote] = useState();
 
 	useEffect(() => {
-		setStatus(poll ? 'ready' : 'loading');
+		if(poll) {
+			const hasVoted = store.get(`voted-${poll.id}`);
+			setStatus(!hasVoted ? 'ready' : 'done');
+
+		} else
+			setStatus('loading');
 	}, [poll]);
 
 	const sendVote = async voteValue => {
@@ -32,6 +39,7 @@ const PollVoteZone = ({ poll }) => {
 
 		setStatus('done');
 		setUserVote(null)
+		store.set(`voted-${poll.id}`, true);
 	}
 
 	return (status !== 'done') ? (
