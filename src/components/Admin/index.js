@@ -60,7 +60,7 @@ const Admin = ({ children }) => {
 			<Container>
 				<Row className="justify-content-md-center text-center mt-5">
 					<Col>
-						<Button onClick={() => logout({ returnTo: window.location.origin })}>Log out</Button>
+						<Button variant="danger" onClick={() => logout({ returnTo: window.location.origin })}>Log out</Button>
 					</Col>
 				</Row>
 			</Container>

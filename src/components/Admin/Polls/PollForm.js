@@ -37,7 +37,7 @@ const PollForm = ({
 		<Row className="justify-content-md-center text-center">
 			{!loading ? (
 				<Col>
-					<Button variant="primary" type="submit" readOnly={loading || saving}>
+					<Button variant="success" type="submit" readOnly={loading || saving}>
 						Save
 					</Button>
 					{!saving ? (
