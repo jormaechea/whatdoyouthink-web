@@ -1,68 +1,45 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+  <img src="https://simplepoll.jormaechea.com.ar/logo-192.png" alt="Simple Poll App logo" />
+</p>
 
-## Available Scripts
+<h1 align="center">Simple Poll App</h1>
 
-In the project directory, you can run:
+<p align="center">
+	<strong>Simple Poll App is a web app to get easy feedback on customer satisfaction.</strong>
+</p>
 
-### `yarn start`
+<hr />
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<p align="center">
+	<a href="https://simplepoll.jormaechea.com.ar/">Home</a>
+	|
+	<a href="https://simplepoll.jormaechea.com.ar/poll/5f023796fb53a40012455262">Feedback</a>
+	|
+	<a href="https://simplepoll.jormaechea.com.ar/about">About</a>
+</p>
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+<hr />
 
-### `yarn test`
+## About the app
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Simple Poll is an open source solution to easy feedback. It also offers a free hosted instance in case you don't want to host your own.
 
-### `yarn build`
+The app is as simple as it can be. Just login, create your poll and get one-click feedback.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Whether you just made a presentation at work or you want to know what your friends and family think about your side project early stages, Simple Poll is a perfect fit for you.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Even Simple Poll gathers feedback about itself [here](https://simplepoll.jormaechea.com.ar/poll/5f023796fb53a40012455262)!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## About this repo
 
-### `yarn eject`
+This repo contains the frontend of Simple Poll. You can see the Serverless backend in it's own [repo](https://github.com/jormaechea/simple-poll-api).
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+This may not be the best version of what it can be, but it's definitely a proof that this can be easily achieved.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Contributing
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Contributions are always welcome. Feel free to open issues or pull-requests so we can improve this as a community.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## License
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+[MIT](/LICENSE.md)
