@@ -1,20 +1,35 @@
 import React from 'react';
-import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Navbar from 'react-bootstrap/Navbar';
-
-import PollSearch from '../PollSearch';
+import Nav from 'react-bootstrap/Nav';
 
 const Header = () => {
-
-	const location = useLocation();
-
 	return (
-		<Navbar bg="dark" variant="dark" className="justify-content-between">
-			<Navbar.Brand href="/">Simple Poll</Navbar.Brand>
-			{location.pathname !== '/' ? (
-				<PollSearch inline />
-			) : null}
+		<Navbar bg="dark" variant="dark" className="justify-content-between" expand="md">
+			<Link to="/" className="navbar-brand">
+				<img
+					src="/logo-64.png"
+					width="30"
+					height="30"
+					className="d-inline-block align-top"
+					alt="Simple Poll logo"
+				/>
+				{' '}
+				Simple Poll
+			</Link>
+
+			<Navbar.Toggle aria-controls="app-header"/>
+			<Navbar.Collapse id="app-header">
+				<Nav className="ml-auto">
+					<Nav.Item>
+						<Link to="/about" className="nav-link">About</Link>
+					</Nav.Item>
+					<Nav.Item>
+						<Link to="/admin/poll" className="nav-link">Admin</Link>
+					</Nav.Item>
+				</Nav>
+			</Navbar.Collapse>
 		</Navbar>
 	);
 };
