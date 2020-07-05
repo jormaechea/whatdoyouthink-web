@@ -8,8 +8,6 @@ import Tooltip from 'react-bootstrap/Tooltip';
 
 import QRCode from 'qrcode.react';
 
-import Skeleton from 'react-loading-skeleton';
-
 const selectContent = event => event.target.select();
 
 const tryToCopyToClipboard = async event => {
