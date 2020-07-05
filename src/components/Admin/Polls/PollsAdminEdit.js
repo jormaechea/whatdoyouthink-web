@@ -27,6 +27,13 @@ const PollsAdminEdit = ({ match }) => {
 
 	const isNew = match.params.pollId === 'new';
 
+	if(isNew && !poll) {
+		setPoll({
+			title: '',
+			kind: 'thumbs'
+		});
+	}
+
 	const onFormChange = event => {
 		const {
 			name,

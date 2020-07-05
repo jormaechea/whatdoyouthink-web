@@ -23,12 +23,28 @@ const PollForm = ({
 
 		<Form.Group>
 			<Form.Label>What's you poll title?</Form.Label>
-			<Form.Control type="text" placeholder="Put some awesome title!" size="lg" readOnly={loading || saving} value={poll ? poll.title : ''} name="title" onChange={handleChange} />
+			<Form.Control
+				type="text"
+				placeholder="Put some awesome title!"
+				size="lg"
+				readOnly={loading || saving}
+				value={poll ? poll.title : ''}
+				name="title"
+				onChange={handleChange}
+				required
+			/>
 		</Form.Group>
 
 		<Form.Group>
 			<Form.Label>What kind of votes you want to show?</Form.Label>
-			<Form.Control as="select" size="lg" readOnly={loading || saving} value={poll ? poll.kind : ''} name="kind" onChange={handleChange}>
+			<Form.Control
+				as="select"
+				size="lg"
+				readOnly={loading || saving}
+				value={poll ? poll.kind : null}
+				name="kind"
+				onChange={handleChange}
+			>
 				<option value="thumbs">Thumb up / down</option>
 				<option value="emojis">Happy / angry emoji</option>
 			</Form.Control>
