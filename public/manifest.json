@@ -28,8 +28,15 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/",
+  "start_url": "/?utm_source=pwa",
   "display": "standalone",
   "theme_color": "#343A40",
-  "background_color": "#FFFFFF"
+  "background_color": "#FFFFFF",
+  "shortcuts": [
+    {
+      "name": "My polls",
+      "description": "View my polls information",
+      "url": "/admin/poll?utm_source=pwa"
+    }
+  ]
 }
