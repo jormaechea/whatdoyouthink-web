@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Alert from 'react-bootstrap/Alert';
 
 import Skeleton from 'react-loading-skeleton';
 
@@ -55,12 +56,13 @@ const PollsAdminEdit = ({ match }) => {
 		const apiCall = isNew ? PrivateApi.createPoll : PrivateApi.updatePoll;
 
 		try {
+			setApiError(null);
 			const accessToken = await getAccessTokenSilently();
 			await apiCall(accessToken, poll, match.params.pollId);
 			sendEvent(isNew ? 'create' : 'edit', 'poll-admin');
 			history.push('/admin/poll');
 		} catch(err) {
-			setApiError(true);
+			setApiError((err.response && err.response.data && err.response.data.message) || err.message);
 			setSaving(false);
 		}
 	};
@@ -76,14 +78,14 @@ const PollsAdminEdit = ({ match }) => {
 			}
 
 			try {
+				setApiError(null);
 				const accessToken = await getAccessTokenSilently();
 				const userPoll = await PrivateApi.getPollById(accessToken, match.params.pollId)
 
 				setPoll(userPoll);
 				setLoading(false);
 			} catch(err) {
-				console.error('An error ocurred with during poll fetch', err);
-				setApiError(err);
+				setApiError((err.response && err.response.data && err.response.data.message) || err.message);
 				setLoading(false);
 			}
 
@@ -91,40 +93,30 @@ const PollsAdminEdit = ({ match }) => {
 	}, [getAccessTokenSilently, match.params.pollId, isNew]);
 
 	return (
-		apiError ? (
-			<Container>
-				<Row>
-					<Col>
-						<h2 className="text-center mt-5 mb-5">An error ocurred</h2>
-					</Col>
-				</Row>
-				<Row className="justify-content-md-center text-center">
-					<Col>
-						<span>{apiError.message}</span>
-					</Col>
-				</Row>
-			</Container>
-		) : (
-			<Container>
-				<Row>
-					<Col>
-						<h2 className="text-center mt-5 mb-5">{!loading ? (isNew ? 'Create your poll!' : poll.title) : <Skeleton />}</h2>
-					</Col>
-				</Row>
-				<Row className="justify-content-md-center">
-					<Col>
-						<PollForm
-							isNew={isNew}
-							loading={loading}
-							saving={saving}
-							poll={poll}
-							handleChange={onFormChange}
-							handleSubmit={onFormSumbit}
-						/>
-					</Col>
-				</Row>
-			</Container>
-		)
+		<Container>
+			{apiError ? (
+				<Alert variant="danger" dismissible>
+					An error ocurred: {apiError}
+				</Alert>
+			) : null}
+			<Row>
+				<Col>
+					<h2 className="text-center mt-5 mb-5">{!loading ? (isNew ? 'Create your poll!' : (poll.title || 'What is it gonna be?')) : <Skeleton />}</h2>
+				</Col>
+			</Row>
+			<Row className="justify-content-md-center">
+				<Col>
+					<PollForm
+						isNew={isNew}
+						loading={loading}
+						saving={saving}
+						poll={poll}
+						handleChange={onFormChange}
+						handleSubmit={onFormSumbit}
+					/>
+				</Col>
+			</Row>
+		</Container>
 	);
 };
 
