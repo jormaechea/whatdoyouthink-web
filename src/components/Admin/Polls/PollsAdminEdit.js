@@ -7,11 +7,13 @@ import Col from 'react-bootstrap/Col';
 
 import Skeleton from 'react-loading-skeleton';
 
+import { useAuth0 } from '@auth0/auth0-react';
+
 import PrivateApi from '../../../api/private';
 
 import PollForm from './PollForm';
 
-import { useAuth0 } from '@auth0/auth0-react';
+import { sendEvent } from '../../../utils/analytics';
 
 const PollsAdminEdit = ({ match }) => {
 
@@ -48,6 +50,7 @@ const PollsAdminEdit = ({ match }) => {
 		try {
 			const accessToken = await getAccessTokenSilently();
 			await apiCall(accessToken, poll, match.params.pollId);
+			sendEvent(isNew ? 'create' : 'edit', 'poll-admin');
 			history.push('/admin/poll');
 		} catch(err) {
 			setApiError(true);

@@ -4,11 +4,11 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import { useAuth0 } from '@auth0/auth0-react';
+
 import PrivateApi from '../../../api/private';
 
 import PollsTable from './PollsTable';
-
-import { useAuth0 } from '@auth0/auth0-react';
 
 const PollsAdminList = () => {
 

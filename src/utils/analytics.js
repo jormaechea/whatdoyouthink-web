@@ -1,23 +1,29 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
-import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
+export const sendEvent = (action, category, label, value) => {
+
+	window.gtag('event', action, {
+		event_category: category,
+		event_label: label,
+		event_value: value
+	});
+}
+
+const sendPageView = page => {
+	window.gtag('config', process.env.REACT_APP_GA_ID, { page_path: page });
+}
 
 const AnalyticsTraker = () => {
 
-	const history = useHistory();
+	const location = useLocation();
 
 	useEffect(() => {
-		history.listen((location) => {
-			if(window.ga) {
-				window.ga('set', 'page', location.pathname + location.search);
-				window.ga('send', 'pageview');
-			}
-		});
-	}, [history])
+		sendPageView(location.pathname + location.search);
+	}, [location])
 
-	console.log('history', history);
-	return <></>;
+	return null;
 };
 
 export default AnalyticsTraker;

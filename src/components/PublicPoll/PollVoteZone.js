@@ -13,6 +13,8 @@ import store from 'store';
 import PublicApi from '../../api/public';
 import PollVoteOption from './PollVoteOption';
 
+import { sendEvent } from '../../utils/analytics';
+
 const PollVoteZone = ({ poll }) => {
 
 	const [status, setStatus] = useState('loading');
@@ -36,6 +38,8 @@ const PollVoteZone = ({ poll }) => {
 		setStatus('voting');
 
 		await PublicApi.votePoll(poll.id, voteValue);
+
+		sendEvent('vote', 'poll', voteValue);
 
 		setStatus('done');
 		setUserVote(null)
