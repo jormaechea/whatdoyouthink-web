@@ -18,7 +18,7 @@ const Footer = () => {
 			</Navbar.Text>
 			<Navbar.Text className="text-right ">
 				<a href="https://github.com/jormaechea" target="_blank" rel="noopener noreferrer">
-					<small class="text-muted">
+					<small className="text-muted">
 						<span>Made with</span>{' '}
 						<Emoji symbol="❤️" label="love" />{' '}
 						<span>by</span>{' '}
