@@ -14,6 +14,7 @@ import About from './components/About';
 import PublicPoll from './components/PublicPoll';
 import Footer from './components/Footer';
 import Authorize from './components/Admin/Authorize';
+import AnalyticsTraker from './utils/analytics';
 
 import AuthWrapper from './components/Admin/AuthWrapper';
 
@@ -37,6 +38,7 @@ const App = () => {
 					</Switch>
 				</div>
 				<Footer/>
+				<AnalyticsTraker />
 			</Router>
 		</AuthWrapper>
 	);
