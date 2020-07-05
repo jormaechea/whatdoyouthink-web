@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+
+import Skeleton from 'react-loading-skeleton';
 
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -62,6 +66,17 @@ const PollsAdminList = () => {
 				<Row className="justify-content-md-center text-center">
 					<Col>
 						<PollsTable loading={loading} polls={polls} />
+					</Col>
+				</Row>
+				<Row className="justify-content-md-center text-center">
+					<Col>
+						{loading ? <Skeleton width={120} height={38} /> : (
+							<Link to="/admin/poll/new">
+								<Button variant="success">
+									Create a poll
+								</Button>
+							</Link>
+						)}
 					</Col>
 				</Row>
 			</Container>

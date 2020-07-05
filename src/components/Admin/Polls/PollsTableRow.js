@@ -37,7 +37,7 @@ const PollsTableRow = ({
 						<Button variant="success">View</Button>
 					</Link>
 				</span>
-			) : <Skeleton />}</td>
+			) : <Skeleton width={54} height={34} count={2} className="ml-2" />}</td>
 		</tr>
 	);
 };
