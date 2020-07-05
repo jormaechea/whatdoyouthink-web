@@ -11,11 +11,11 @@
 <hr />
 
 <p align="center">
-	<a href="https://simplepoll.jormaechea.com.ar/">Home</a>
+	<a href="https://simplepoll.jormaechea.com.ar/?utm_source=readme_top&utm_medium=github&utm_campaign=home">Home</a>
 	|
-	<a href="https://simplepoll.jormaechea.com.ar/poll/5f023796fb53a40012455262">Feedback</a>
+	<a href="https://simplepoll.jormaechea.com.ar/poll/5f023796fb53a40012455262?utm_source=readme_top&utm_medium=github&utm_campaign=feedback">Feedback</a>
 	|
-	<a href="https://simplepoll.jormaechea.com.ar/about">About</a>
+	<a href="https://simplepoll.jormaechea.com.ar/about?utm_source=readme_top&utm_medium=github&utm_campaign=about">About</a>
 </p>
 
 <hr />
@@ -28,7 +28,7 @@ The app is as simple as it can be. Just login, create your poll and get one-clic
 
 Whether you just made a presentation at work or you want to know what your friends and family think about your side project early stages, Simple Poll is a perfect fit for you.
 
-Even Simple Poll gathers feedback about itself [here](https://simplepoll.jormaechea.com.ar/poll/5f023796fb53a40012455262)!
+Even Simple Poll gathers feedback about itself [here](https://simplepoll.jormaechea.com.ar/poll/5f023796fb53a40012455262?utm_source=readme_bottom&utm_medium=github&utm_campaign=feedback)!
 
 ## About this repo
 
