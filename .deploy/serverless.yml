@@ -1,0 +1,17 @@
+service: SimplePollFront
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  memorySize: 192
+  stage: ${opt:stage, 'local'}
+  region: ${opt:region, 'us-east-1'}
+
+resources:
+  - ${file(resources/bucket.yml)}
+  - ${file(resources/bucket-policy.yml)}
+  - ${file(resources/cloudfront.yml)}
+  - ${file(resources/dns-record.yml)}
+
+plugins:
+  - serverless-dotenv-plugin

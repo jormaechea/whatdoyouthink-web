@@ -1,0 +1,13 @@
+Resources:
+  ServiceBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: ${env:DEPLOY_BUCKET_NAME}
+      PolicyDocument:
+        Statement:
+          - Action: s3:GetObject
+            Effect: Allow
+            Resource: 'arn:aws:s3:::${env:DEPLOY_BUCKET_NAME}/app/*'
+            Principal:
+              CanonicalUser:
+                Fn::GetAtt: ['CloudFrontOriginAccessIdentity', 'S3CanonicalUserId']

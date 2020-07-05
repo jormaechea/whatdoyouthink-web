@@ -1,0 +1,51 @@
+Resources:
+  CloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Comment: 'Simple Poll App Distribution'
+        Aliases:
+          - ${env:DEPLOY_DOMAIN_NAME}
+        DefaultRootObject: 'index.html'
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - HEAD
+            - GET
+          CachedMethods:
+            - HEAD
+            - GET
+          Compress: true
+          ForwardedValues:
+            QueryString: false
+          TargetOriginId: AppOrigin
+          ViewerProtocolPolicy: redirect-to-https
+          MinTTL: 3600
+          DefaultTTL: 3600
+          MaxTTL: 3600
+        CustomErrorResponses:
+          - ErrorCode: 403
+            ResponseCode: 200
+            ResponsePagePath: '/index.html'
+        Enabled: true
+        HttpVersion: http2
+        Origins:
+          - DomainName: ${env:DEPLOY_BUCKET_NAME}.s3.amazonaws.com
+            Id: AppOrigin
+            OriginPath: /app
+            S3OriginConfig:
+              OriginAccessIdentity:
+                Fn::Join:
+                  - ''
+                  - - origin-access-identity/cloudfront/
+                    - Ref: CloudFrontOriginAccessIdentity
+        PriceClass: PriceClass_100
+        ViewerCertificate:
+          AcmCertificateArn: ${env:DEPLOY_CERTIFICATE_ARN}
+          SslSupportMethod: sni-only
+          MinimumProtocolVersion: TLSv1.1_2016
+
+  CloudFrontOriginAccessIdentity:
+    Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+    Properties:
+      CloudFrontOriginAccessIdentityConfig:
+        Comment: 'Simple Poll App Distribution'

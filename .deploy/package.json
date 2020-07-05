@@ -1,0 +1,14 @@
+{
+  "name": "simple-poll-front-deploy",
+  "version": "1.0.0",
+  "description": "The service deploy process",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joaquín Ormaechea (https://github.com/jormaechea)",
+  "license": "MIT",
+  "devDependencies": {
+    "serverless": "^1.74.1",
+    "serverless-dotenv-plugin": "^2.4.2"
+  }
+}

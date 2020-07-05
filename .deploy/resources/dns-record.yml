@@ -1,0 +1,11 @@
+Resources:
+  DnsRecord:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneName: ${env:DEPLOY_HOSTED_ZOME_NAME}
+      Type: A
+      Name: ${env:DEPLOY_DOMAIN_NAME}
+      AliasTarget:
+        HostedZoneId: Z2FDTNDATAQYW2 # Cloudfront zone ID
+        DNSName:
+          Fn::GetAtt: CloudFrontDistribution.DomainName
