@@ -38,7 +38,7 @@ const About = () => {
 						<ListGroup variant="flush">
 							<ListGroup.Item>One click login with google</ListGroup.Item>
 							<ListGroup.Item>Simple poll creation</ListGroup.Item>
-							<ListGroup.Item>Share poll with QR (pending)</ListGroup.Item>
+							<ListGroup.Item>Share poll with QR</ListGroup.Item>
 							<ListGroup.Item>Customize poll voting with thumbs or emojis</ListGroup.Item>
 							<ListGroup.Item>One-click vote</ListGroup.Item>
 							<ListGroup.Item>Admin to manage your polls and see the results</ListGroup.Item>
