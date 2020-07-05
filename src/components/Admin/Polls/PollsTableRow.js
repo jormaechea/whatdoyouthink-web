@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 import Skeleton from 'react-loading-skeleton';
 
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const getVotesStats = votes => {
 	const stats = votes.reduce((acum, vote) => {
@@ -19,23 +21,31 @@ const getVotesStats = votes => {
 	return `${votes.length} votes: ${stats.positive} positive, ${stats.negative} negative.`
 }
 
+
 const PollsTableRow = ({
-	poll
+	poll,
+	openShareModal
 }) => {
+
+	const history = useHistory();
+
 	return (
 		<tr>
-			<td>{poll ? poll.title : <Skeleton />}</td>
-			<td>{poll ? poll.kind : <Skeleton />}</td>
+			<td>{poll ? (
+				<Link to={`/poll/${poll.id}`}>
+					{poll.title}
+				</Link>
+			) : <Skeleton />}</td>
+			<td className="d-none d-sm-block">{poll ? poll.kind : <Skeleton />}</td>
 			<td>{poll ? getVotesStats(poll.votes) : <Skeleton />}</td>
 			<td>{poll ? (
 				<span>
-					<Link to={`/admin/poll/${poll.id}`} title={`Edit ${poll.title}`}>
-						<Button>Edit</Button>
-					</Link>
-					{' '}
-					<Link to={`/poll/${poll.id}`} title={`View ${poll.title}`}>
-						<Button variant="success">View</Button>
-					</Link>
+					<Button className="mr-0 mb-2 mb-sm-0 mr-sm-2" onClick={() => history.push(`/admin/poll/${poll.id}`)}>
+						Edit
+					</Button>
+					<Button variant="success" onClick={() => openShareModal(poll)}>
+						Share
+					</Button>
 				</span>
 			) : <Skeleton width={54} height={34} count={2} className="ml-2" />}</td>
 		</tr>

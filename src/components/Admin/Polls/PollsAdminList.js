@@ -13,6 +13,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import PrivateApi from '../../../api/private';
 
 import PollsTable from './PollsTable';
+import PollsShareModal from './PollsShareModal';
 
 const PollsAdminList = () => {
 
@@ -21,6 +22,10 @@ const PollsAdminList = () => {
 	const [polls, setPolls] = useState();
 	const [loading, setLoading] = useState(true);
 	const [apiError, setApiError] = useState(false);
+	const [pollShareModal, setshowShareModal] = useState(null);
+
+	const closeShareModal = () => setshowShareModal(null);
+	const openShareModal = (poll) => setshowShareModal(poll);
 
 	useEffect(() => {
 
@@ -65,7 +70,7 @@ const PollsAdminList = () => {
 				</Row>
 				<Row className="justify-content-md-center text-center">
 					<Col>
-						<PollsTable loading={loading} polls={polls} />
+						<PollsTable loading={loading} polls={polls} openShareModal={openShareModal} />
 					</Col>
 				</Row>
 				<Row className="justify-content-md-center text-center">
@@ -79,6 +84,11 @@ const PollsAdminList = () => {
 						)}
 					</Col>
 				</Row>
+				<PollsShareModal
+					show={!!pollShareModal}
+					handleClose={closeShareModal}
+					poll={pollShareModal}
+				/>
 			</Container>
 		)
 	);
