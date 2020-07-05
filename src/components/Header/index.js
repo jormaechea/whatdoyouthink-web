@@ -26,7 +26,7 @@ const Header = () => {
 						<Link to="/about" className="nav-link">About</Link>
 					</Nav.Item>
 					<Nav.Item>
-						<Link to="/admin/poll" className="nav-link">Admin</Link>
+						<Link to="/admin/poll" className="nav-link">My Polls</Link>
 					</Nav.Item>
 				</Nav>
 			</Navbar.Collapse>
