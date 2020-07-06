@@ -3,7 +3,7 @@ Resources:
     Type: AWS::CloudFront::Distribution
     Properties:
       DistributionConfig:
-        Comment: 'Simple Poll App Distribution'
+        Comment: 'WhatDoYouThink App Distribution'
         Aliases:
           - ${env:DEPLOY_DOMAIN_NAME}
         DefaultRootObject: 'index.html'
@@ -48,4 +48,4 @@ Resources:
     Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
     Properties:
       CloudFrontOriginAccessIdentityConfig:
-        Comment: 'Simple Poll App Distribution'
+        Comment: 'WhatDoYouThink App Distribution'

@@ -1,5 +1,5 @@
 {
-  "name": "simple-poll-front-deploy",
+  "name": "whatdoyouthink-web-deploy",
   "version": "1.0.0",
   "description": "The service deploy process",
   "scripts": {

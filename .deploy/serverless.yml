@@ -1,4 +1,4 @@
-service: SimplePollFront
+service: WhatDoYouThinkWeb
 
 provider:
   name: aws

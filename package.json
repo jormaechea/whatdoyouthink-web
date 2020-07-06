@@ -1,17 +1,17 @@
 {
-  "name": "simple-poll-front",
+  "name": "whatdoyouthink-web",
   "version": "0.1.0",
-  "description": "This is the Frontend of the Simple Poll app",
+  "description": "This is the Frontend of the WhatDoYouThink App",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jormaechea/simple-poll-front.git"
+    "url": "git+https://github.com/jormaechea/whatdoyouthink-web.git"
   },
   "author": "Joaquín Ormaechea (https://github.com/jormaechea)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jormaechea/simple-poll-front/issues"
+    "url": "https://github.com/jormaechea/whatdoyouthink-web/issues"
   },
-  "homepage": "https://simplepoll.jormaechea.com.ar",
+  "homepage": "https://whatdoyouthink.jormaechea.com.ar",
   "dependencies": {
     "@auth0/auth0-react": "^1.0.0",
     "@testing-library/jest-dom": "^4.2.4",

@@ -13,10 +13,10 @@ const Header = () => {
 					width="30"
 					height="30"
 					className="d-inline-block align-top"
-					alt="Simple Poll logo"
+					alt="WhatDoYouThink logo"
 				/>
 				{' '}
-				Simple Poll
+				WhatDoYouThink
 			</Link>
 
 			<Navbar.Toggle aria-controls="app-header"/>

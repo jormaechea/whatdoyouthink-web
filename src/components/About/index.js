@@ -14,9 +14,9 @@ const About = () => {
 		<Container fluid className="px-0">
 			<Jumbotron>
 				<Container>
-					<h1>Simple Poll</h1>
+					<h1>WhatDoYouThink</h1>
 					<p>
-						Simple Poll is an app designed to get instant feedback.
+						WhatDoYouThink is an app designed to get instant feedback.
 					</p>
 				</Container>
 			</Jumbotron>
