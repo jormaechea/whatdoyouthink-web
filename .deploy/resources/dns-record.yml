@@ -2,7 +2,7 @@ Resources:
   DnsRecord:
     Type: AWS::Route53::RecordSet
     Properties:
-      HostedZoneName: ${env:DEPLOY_HOSTED_ZOME_NAME}
+      HostedZoneName: ${env:DEPLOY_HOSTED_ZONE_NAME}
       Type: A
       Name: ${env:DEPLOY_DOMAIN_NAME}
       AliasTarget:

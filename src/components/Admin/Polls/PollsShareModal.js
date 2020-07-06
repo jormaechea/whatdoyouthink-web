@@ -54,13 +54,13 @@ const PollsTableRow = ({
 				{poll ? (
 					<>
 						<QRCode
-							value={`${window.location.origin}/poll/${poll.id}`}
+							value={`${window.location.origin}/poll/${poll.id}?utm_source=share&utm_medium=qr&utm_campaign=user_share`}
 							renderAs="svg"
 							size={192}
 							className="mb-5"
 						/>
 						<Form.Control
-							value={`${window.location.origin}/poll/${poll.id}`}
+							value={`${window.location.origin}/poll/${poll.id}?utm_source=share&utm_medium=url&utm_campaign=user_share`}
 							ref={target}
 							onFocus={handleLinkFocus}
 							readOnly
