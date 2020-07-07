@@ -9,7 +9,7 @@ import PollSearch from '../PollSearch';
 export default () => {
 
 	return (
-		<Container>
+		<Container fluid>
 			<Row>
 				<Col>
 					<h2 className="text-center mt-5 mb-5">Enter the Poll ID</h2>
@@ -17,7 +17,7 @@ export default () => {
 			</Row>
 			<Row className="justify-content-md-center text-center">
 				<Col md="6">
-					<PollSearch inline={false} />
+					<PollSearch />
 				</Col>
 			</Row>
 		</Container>

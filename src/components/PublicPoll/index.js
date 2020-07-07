@@ -1,35 +1,51 @@
 import React, { useState, useEffect } from 'react';
 
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import PublicApi from '../../api/public';
 
 import Poll from './Poll';
 
-const useGetPoll = async (pollId, setPoll) => {
-	try {
-		const poll = await PublicApi.getPoll(pollId);
-		setPoll(poll);
-	} catch(e) {
-		console.error(`Error fetching poll: ${e.message}`);
-	}
-};
-
 export default ({ match }) => {
 
 	const [poll, setPoll] = useState(null);
+	const [error, setError] = useState(null);
 
 	useEffect(() => {
 		if(poll && poll.id === match.params.pollId)
 			return;
 
-		setPoll(null);
-		useGetPoll(match.params.pollId, setPoll);
-	}, [poll, match.params.pollId]);
+		(async () => {
+			console.log('ejecutó');
+
+			setPoll(null);
+
+			try {
+				const result = await PublicApi.getPoll(match.params.pollId);
+				setPoll(result);
+			} catch(err) {
+				setError((err.response && err.response.data && err.response.data.message) || err.message);
+			}
+		})();
+
+	}, [poll, match.params.pollId, error]);
 
 	return (
 		<Container fluid>
-			<Poll poll={poll} />
+			{error ? (
+				<Container>
+					<Row className="justify-content-md-center">
+						<Col xs="12" md="6" className="mt-5 mb-5">
+							<h2 className="text-center my-4">{error}</h2>
+						</Col>
+					</Row>
+				</Container>
+			) : (
+				<Poll poll={poll} />
+			)
+			}
 		</Container>
 	);
 };

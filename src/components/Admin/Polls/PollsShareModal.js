@@ -28,6 +28,11 @@ const tryToCopyToClipboard = async event => {
 		return document.execCommand('copy');
 };
 
+const pollIdStyle = {
+	fontSize: '2rem',
+	letterSpacing: '2px'
+};
+
 const PollsTableRow = ({
 	show,
 	handleClose,
@@ -53,6 +58,7 @@ const PollsTableRow = ({
 			<Modal.Body className="text-center">
 				{poll ? (
 					<>
+						<p style={pollIdStyle}>{poll.id}</p>
 						<QRCode
 							value={`${window.location.origin}/poll/${poll.id}?utm_source=share&utm_medium=qr&utm_campaign=user_share`}
 							renderAs="svg"
