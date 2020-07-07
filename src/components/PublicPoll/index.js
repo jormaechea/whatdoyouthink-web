@@ -18,7 +18,6 @@ export default ({ match }) => {
 			return;
 
 		(async () => {
-			console.log('ejecutó');
 
 			setPoll(null);
 

@@ -32,7 +32,7 @@ const PollSearch = () => {
 			<FormControl
 				type="text"
 				style={inputStyle}
-				className="mx-0 mx-sm-auto px-0 px-sm-2 mb-3 shadow-none rounded-0 border-top-0 border-right-0 border-left-0 text-center"
+				className="mx-auto px-0 px-sm-2 mb-3 shadow-none rounded-0 border-top-0 border-right-0 border-left-0 text-center"
 				value={pollId}
 				onChange={e => setPollId(e.target.value)}
 				minLength={6}
