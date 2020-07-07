@@ -13,7 +13,7 @@ const inputStyle = {
 
 const PollSearch = () => {
 
-	const [pollId, setPollId] = useState('N4hMO0');
+	const [pollId, setPollId] = useState('');
 
 	const history = useHistory();
 
