@@ -1,0 +1,45 @@
+body {
+	background-color: #222;
+	color: #FFF;
+}
+
+.form-control,
+.form-control:focus {
+	background: #333;
+	color: #DDD;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+	background: #444;
+	color: #DDD;
+}
+
+.jumbotron {
+	background: #444;
+	color: #FFF;
+}
+
+.list-group-item {
+	background: #333;
+}
+
+.table {
+	color: #FFF;
+}
+
+.modal-content {
+	background-color: #333;
+}
+
+.close {
+	color: #EEE;
+}
+
+.close:hover {
+	color: #FFF;
+}
+
+.text-muted {
+	color: #C8C8C8!important;
+}

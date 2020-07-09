@@ -7,7 +7,7 @@ import Emoji from 'a11y-react-emoji';
 
 const Footer = () => {
 	return (
-		<Navbar bg="light" variant="light" fixed="bottom" className="justify-content-between">
+		<Navbar bg="dark" variant="dark" fixed="bottom" className="justify-content-between">
 			<Navbar.Text>
 				<Link to="/admin/poll">
 					<small>

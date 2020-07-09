@@ -5,6 +5,8 @@ import {
 	Switch
 } from 'react-router-dom';
 
+import { SkeletonTheme } from "react-loading-skeleton";
+
 import Header from './components/Header';
 import Home from './components/Home';
 import Admin from './components/Admin';
@@ -21,25 +23,27 @@ import AuthWrapper from './components/Admin/AuthWrapper';
 const App = () => {
 	return (
 		<AuthWrapper>
-			<Router>
-				<Header/>
-				<div style={{ marginBottom: '100px' }}>
-					<Switch>
-						<Route path="/" exact component={Home} />
-						<Route path="/about" exact component={About} />
-						<Route path="/poll/:pollId" exact component={PublicPoll} />
-						<Route path="/admin">
-							<Admin>
-								<Route path="/admin/poll" exact component={PollsAdminList} />
-								<Route path="/admin/poll/:pollId" exact component={PollsAdminEdit} />
-							</Admin>
-						</Route>
-						<Route path="/auth/authorize" exact component={Authorize} />
-					</Switch>
-				</div>
-				<Footer/>
-				<AnalyticsTraker />
-			</Router>
+			<SkeletonTheme color="#444" highlightColor="#5A5A5A">
+				<Router>
+					<Header/>
+					<div style={{ marginBottom: '100px' }}>
+						<Switch>
+							<Route path="/" exact component={Home} />
+							<Route path="/about" exact component={About} />
+							<Route path="/poll/:pollId" exact component={PublicPoll} />
+							<Route path="/admin">
+								<Admin>
+									<Route path="/admin/poll" exact component={PollsAdminList} />
+									<Route path="/admin/poll/:pollId" exact component={PollsAdminEdit} />
+								</Admin>
+							</Route>
+							<Route path="/auth/authorize" exact component={Authorize} />
+						</Switch>
+					</div>
+					<Footer/>
+					<AnalyticsTraker />
+				</Router>
+			</SkeletonTheme>
 		</AuthWrapper>
 	);
 }
