@@ -1,3 +1,6 @@
+import { useAuth0 } from '@auth0/auth0-react';
+
+import useSWR from 'swr';
 import axios from 'axios';
 
 const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
@@ -27,11 +30,25 @@ const callPrivateApi = async ({
 	return data;
 };
 
-const getPolls = accessToken => {
-	return callPrivateApi({
-		accessToken,
-		path: '/polls'
-	})
+export const usePolls = () => {
+
+	const { getAccessTokenSilently } = useAuth0();
+
+	const { data, error } = useSWR('polls', async () => {
+
+		const accessToken = await getAccessTokenSilently();
+
+		return callPrivateApi({
+			accessToken,
+			path: '/polls'
+		});
+	});
+
+	return {
+		polls: data,
+		isLoading: !error && !data,
+		hasError: error
+	}
 };
 
 const getPollById = (accessToken, pollId) => {
@@ -60,7 +77,6 @@ const updatePoll = (accessToken, poll, pollId) => {
 };
 
 export default {
-	getPolls,
 	getPollById,
 	createPoll,
 	updatePoll
