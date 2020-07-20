@@ -1,21 +1,40 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
+import Container from '@material-ui/core/Container';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
-import Skeleton from 'react-loading-skeleton';
+import { makeStyles } from '@material-ui/core/styles';
+
+import MainTitle from '../../MainTitle';
 
 import { usePolls } from '../../../api/private';
 
 import PollsTable from './PollsTable';
 import PollsShareModal from './PollsShareModal';
+import Skeleton from '../../Skeleton';
+
+const useStyles = makeStyles(theme => ({
+	root: {
+		marginBottom: theme.spacing(2)
+	},
+	link: {
+		color: theme.palette.text.primary,
+		textDecoration: 'none',
+		'&:hover': {
+			color: theme.palette.action.active,
+			textDecoration: 'none'
+		}
+	}
+}));
 
 const PollsAdminList = () => {
 
-	const [pollShareModal, setshowShareModal] = useState(null);
+	const classes = useStyles();
+
+	const [pollShareModal, setshowShareModal] = useState(false);
 
 	const {
 		polls,
@@ -23,53 +42,39 @@ const PollsAdminList = () => {
 		hasError
 	} = usePolls();
 
-	const closeShareModal = () => setshowShareModal(null);
+	const closeShareModal = () => setshowShareModal(false);
 	const openShareModal = (poll) => setshowShareModal(poll);
 
+	if(hasError) {
+		return (
+			<Container className={classes.root}>
+				<MainTitle>An error ocurred</MainTitle>
+				<Typography variant="body1" align="center">
+					{hasError.message}
+				</Typography>
+			</Container>
+		);
+	}
+
 	return (
-		hasError ? (
-			<Container>
-				<Row>
-					<Col>
-						<h2 className="text-center mt-5 mb-5">An error ocurred</h2>
-					</Col>
-				</Row>
-				<Row className="justify-content-md-center text-center">
-					<Col>
-						<span>{hasError.message}</span>
-					</Col>
-				</Row>
-			</Container>
-		) : (
-			<Container>
-				<Row>
-					<Col>
-						<h2 className="text-center mt-5 mb-5">My polls</h2>
-					</Col>
-				</Row>
-				<Row className="justify-content-md-center text-center">
-					<Col>
-						<PollsTable loading={isLoading} polls={polls} openShareModal={openShareModal} />
-					</Col>
-				</Row>
-				<Row className="justify-content-md-center text-center">
-					<Col>
-						{isLoading ? <Skeleton width={120} height={38} /> : (
-							<Link to="/admin/poll/new">
-								<Button variant="success">
-									Create a poll
-								</Button>
-							</Link>
-						)}
-					</Col>
-				</Row>
-				<PollsShareModal
-					show={!!pollShareModal}
-					handleClose={closeShareModal}
-					poll={pollShareModal}
-				/>
-			</Container>
-		)
+		<Container className={classes.root}>
+			<MainTitle>My polls</MainTitle>
+			<PollsTable loading={isLoading} polls={polls} openShareModal={openShareModal} />
+			<Box align="center">
+				{isLoading ? <Skeleton variant="rect" width={120} height={36} /> : (
+					<Link to="/admin/poll/new" className={classes.link}>
+						<Button variant="contained" color="secondary">
+							Create a poll
+						</Button>
+					</Link>
+				)}
+			</Box>
+			<PollsShareModal
+				show={!!pollShareModal}
+				handleClose={closeShareModal}
+				poll={pollShareModal}
+			/>
+		</Container>
 	);
 };
 

@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Alert from 'react-bootstrap/Alert';
+import Container from '@material-ui/core/Container';
+import Snackbar from '@material-ui/core/Snackbar';
 
-import Skeleton from 'react-loading-skeleton';
+import Skeleton from '../../Skeleton';
 
 import { useAuth0 } from '@auth0/auth0-react';
 
 import PrivateApi from '../../../api/private';
 
+import MainTitle from '../../MainTitle';
 import PollForm from './PollForm';
 
 import { sendEvent } from '../../../utils/analytics';
@@ -34,6 +33,8 @@ const PollsAdminEdit = ({ match }) => {
 			kind: 'thumbs'
 		});
 	}
+
+	const clearError = () => setApiError(null);
 
 	const onFormChange = event => {
 		const {
@@ -94,28 +95,25 @@ const PollsAdminEdit = ({ match }) => {
 
 	return (
 		<Container>
-			{apiError ? (
-				<Alert variant="danger" dismissible>
-					An error ocurred: {apiError}
-				</Alert>
-			) : null}
-			<Row>
-				<Col>
-					<h2 className="text-center mt-5 mb-5">{!loading ? (isNew ? 'Create your poll!' : (poll.title || 'What is it gonna be?')) : <Skeleton />}</h2>
-				</Col>
-			</Row>
-			<Row className="justify-content-md-center">
-				<Col>
-					<PollForm
-						isNew={isNew}
-						loading={loading}
-						saving={saving}
-						poll={poll}
-						handleChange={onFormChange}
-						handleSubmit={onFormSumbit}
-					/>
-				</Col>
-			</Row>
+			<Snackbar
+				open={!!apiError}
+				autoHideDuration={6000}
+				onClose={clearError}
+				message={`An error ocurred: {apiError}`}>
+			</Snackbar>
+
+			<MainTitle>
+				{!loading ? (isNew ? 'Create your poll!' : (poll.title || 'What is it gonna be?')) : <Skeleton />}
+			</MainTitle>
+
+			<PollForm
+				isNew={isNew}
+				loading={loading}
+				saving={saving}
+				poll={poll}
+				handleChange={onFormChange}
+				handleSubmit={onFormSumbit}
+			/>
 		</Container>
 	);
 };

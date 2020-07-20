@@ -5,8 +5,6 @@ import {
 	Switch
 } from 'react-router-dom';
 
-import { SkeletonTheme } from "react-loading-skeleton";
-
 import Header from './components/Header';
 import Home from './components/Home';
 import Admin from './components/Admin';
@@ -18,15 +16,43 @@ import Footer from './components/Footer';
 import Authorize from './components/Admin/Authorize';
 import AnalyticsTraker from './utils/analytics';
 
+import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from "@material-ui/core/CssBaseline";
+
 import AuthWrapper from './components/Admin/AuthWrapper';
 
+const theme = createMuiTheme({
+	palette: {
+		type: 'dark',
+		primary: {
+			main: '#343A40'
+		}
+	}
+});
+
+const useStyles = makeStyles(theme => ({
+	content: {
+		marginTop: '48px',
+		paddingTop: '12px',
+		marginBottom: '48px',
+		paddingBottom: '12px',
+		[theme.breakpoints.down('sm')]: {
+			marginBottom: '80px'
+		}
+	}
+}));
+
 const App = () => {
+
+	const classes = useStyles();
+
 	return (
 		<AuthWrapper>
-			<SkeletonTheme color="#444" highlightColor="#5A5A5A">
+			<ThemeProvider theme={theme}>
+				<CssBaseline/>
 				<Router>
 					<Header/>
-					<div style={{ marginBottom: '100px' }}>
+					<div className={classes.content}>
 						<Switch>
 							<Route path="/" exact component={Home} />
 							<Route path="/about" exact component={About} />
@@ -43,7 +69,7 @@ const App = () => {
 					<Footer/>
 					<AnalyticsTraker />
 				</Router>
-			</SkeletonTheme>
+			</ThemeProvider>
 		</AuthWrapper>
 	);
 }

@@ -1,17 +1,37 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import Button from 'react-bootstrap/Button';
+import FilledInput from '@material-ui/core/FilledInput';
+import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 
-const inputStyle = {
-	fontSize: '55px',
-	letterSpacing: '4px',
-	maxWidth: '330px'
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+	form: {
+		textAlign: 'center',
+		marginBottom: '20px'
+	},
+	input: {
+		fontSize: '55px',
+		letterSpacing: '4px',
+		maxWidth: '330px',
+		marginBottom: '20px',
+		'& input': {
+			textAlign: 'center'
+		}
+	}
+}));
+
+const inputProps = {
+	required: true,
+	minLength: 6,
+	maxLength: 6
 };
 
 const PollSearch = () => {
+
+	const classes = useStyles();
 
 	const [pollId, setPollId] = useState('');
 
@@ -28,22 +48,26 @@ const PollSearch = () => {
 	}
 
 	return (
-		<Form onSubmit={goToPoll}>
-			<FormControl
-				type="text"
-				style={inputStyle}
-				className="mx-auto px-0 px-sm-2 mb-3 shadow-none rounded-0 border-top-0 border-right-0 border-left-0 text-center"
-				value={pollId}
-				onChange={e => setPollId(e.target.value)}
-				minLength={6}
-				maxLength={6}
-			/>
-			<Button
-				variant="outline-success"
-				type="submit">
-					Go to Poll!
-			</Button>
-		</Form>
+		<form autoComplete="off" onSubmit={goToPoll} className={classes.form}>
+			<Box>
+				<FilledInput
+					type="text"
+					className={classes.input}
+					value={pollId}
+					onChange={e => setPollId(e.target.value)}
+					color="secondary"
+					inputProps={inputProps}
+				/>
+			</Box>
+			<Box>
+				<Button
+					variant="contained"
+					color="secondary"
+					type="submit">
+						Go to Poll!
+				</Button>
+			</Box>
+		</form>
 	);
 };
 

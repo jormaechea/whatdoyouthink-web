@@ -1,10 +1,11 @@
 import React from 'react';
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Spinner from 'react-bootstrap/Spinner';
-import Button from 'react-bootstrap/Button';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Button from '@material-ui/core/Button';
+
+import MainTitle from '../MainTitle';
 
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -20,14 +21,9 @@ const Admin = ({ children }) => {
 
 	if(isLoading) {
 		return (
-			<Container>
-				<Row className="justify-content-md-center text-center mt-5">
-					<Col>
-						<Spinner animation="border" role="status">
-							<span className="sr-only">Loading...</span>
-						</Spinner>
-					</Col>
-				</Row>
+			<Container align="center">
+				<CircularProgress color="secondary"/>
+				<Typography variant="body1" align="center">Loading...</Typography>
 			</Container>
 		);
 	}
@@ -35,16 +31,8 @@ const Admin = ({ children }) => {
 	if(error) {
 		return (
 			<Container>
-				<Row>
-					<Col>
-						<h2 className="text-center mt-5 mb-5">An error ocurred</h2>
-					</Col>
-				</Row>
-				<Row className="justify-content-md-center text-center">
-					<Col>
-						<span>{error}</span>
-					</Col>
-				</Row>
+				<MainTitle>An error ocurred</MainTitle>
+				<Typography variant="body1" align="center">{error}</Typography>
 			</Container>
 		);
 	}
@@ -57,12 +45,13 @@ const Admin = ({ children }) => {
 	return (
 		<div>
 			{children}
-			<Container>
-				<Row className="justify-content-md-center text-center mt-5">
-					<Col>
-						<Button variant="danger" onClick={() => logout({ returnTo: window.location.origin })}>Log out</Button>
-					</Col>
-				</Row>
+			<Container align="center">
+				<Button
+					color="secondary"
+					onClick={() => logout({ returnTo: window.location.origin })}
+				>
+					Log out
+				</Button>
 			</Container>
 		</div>
 	);

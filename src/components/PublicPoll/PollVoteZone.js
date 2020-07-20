@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
-import Skeleton from 'react-loading-skeleton';
+import Grid from '@material-ui/core/Grid';
 
 import Emoji from 'a11y-react-emoji';
 
 import store from 'store';
 
+import Skeleton from '../Skeleton';
 import PublicApi from '../../api/public';
 import PollVoteOption from './PollVoteOption';
 
@@ -47,50 +44,53 @@ const PollVoteZone = ({ poll }) => {
 	}
 
 	return (status !== 'done') ? (
-		<Container fluid>
-			<Row className="justify-content-md-center text-center">
-				<Col className="text-center">
-					<p>
-						{poll ? 'What do you think?' : <Skeleton width="60%"/>}
-					</p>
-				</Col>
-			</Row>
-			<Row className="justify-content-md-center text-center">
-				<Col xs="12" md="6">
-					<PollVoteOption
-						kind={poll && poll.kind}
-						voteValue="positive"
-						userVote={userVote}
-						variant="success"
-						status={status}
-						handleClick={sendVote}
-					/>
-				</Col>
-				<Col xs="12" md="6">
-					<PollVoteOption
-						kind={poll && poll.kind}
-						voteValue="negative"
-						userVote={userVote}
-						variant="danger"
-						status={status}
-						handleClick={sendVote}
-					/>
-				</Col>
-			</Row>
-		</Container>
+		<Grid container direction="column" alignItems="center" justify="center" spacing={2}>
+			<Grid item>
+				<p>{poll ? 'What do you think?' : <Skeleton width="60%"/>}</p>
+			</Grid>
+			<Grid item>
+				<Grid container spacing={2}>
+					<Grid item xs={6}>
+						<PollVoteOption
+							kind={poll && poll.kind}
+							voteValue="positive"
+							userVote={userVote}
+							variant="contained"
+							status={status}
+							handleClick={sendVote}
+						/>
+					</Grid>
+					<Grid item xs={6}>
+						<PollVoteOption
+							kind={poll && poll.kind}
+							voteValue="negative"
+							userVote={userVote}
+							variant="contained"
+							status={status}
+							handleClick={sendVote}
+						/>
+					</Grid>
+				</Grid>
+			</Grid>
+		</Grid>
 	) : (
-		<Container fluid>
-			<Row className="justify-content-md-center text-center">
-				<Col className="text-center">
-					<p>
-						{'Thanks for voting!'}
-					</p>
-					<p>
-						<Emoji symbol="🎉"  style={{ fontSize: '3em' }} />
-					</p>
-				</Col>
-			</Row>
-		</Container>
+		<Grid
+			container
+			direction="column"
+			alignItems="center"
+			justify="center"
+			alignContent="center"
+			spacing={2}
+		>
+			<Grid item>
+				<p>Thanks for voting!</p>
+			</Grid>
+			<Grid item>
+				<p>
+					<Emoji symbol="🎉"  style={{ fontSize: '3em' }} />
+				</p>
+			</Grid>
+		</Grid>
 	);
 };
 

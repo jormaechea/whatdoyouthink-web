@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
 import PublicApi from '../../api/public';
 
+import MainTitle from '../MainTitle';
 import Poll from './Poll';
 
 export default ({ match }) => {
@@ -31,20 +28,5 @@ export default ({ match }) => {
 
 	}, [poll, match.params.pollId, error]);
 
-	return (
-		<Container fluid>
-			{error ? (
-				<Container>
-					<Row className="justify-content-md-center">
-						<Col xs="12" md="6" className="mt-5 mb-5">
-							<h2 className="text-center my-4">{error}</h2>
-						</Col>
-					</Row>
-				</Container>
-			) : (
-				<Poll poll={poll} />
-			)
-			}
-		</Container>
-	);
+	return error ? <MainTitle>{error}</MainTitle> : <Poll poll={poll} />;
 };
